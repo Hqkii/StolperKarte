@@ -1,0 +1,31 @@
+
+#map {
+    height: 1000px;
+}
+
+/* Stil für benutzerdefinierte Popups */
+.custom-popup {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.h1 {
+
+    margin: 12px;
+    padding: 12px;
+    font-family: Verdana, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 15px;
+    
+
+}
+
+.h1 {
+    background-color: #BCB6A4;
+    color: #fff;
+}
