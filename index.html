@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup bei Marker-Klick</title>
+    <link rel="stylesheet" href="style.css">
+    
+
+    <!-- Leaflet CSS einbinden -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+
+</head>
+<body>
+    <h1 class="h1">Stolperkarte</h1>
+    <div id="map"></div>
+
+    <!-- Leaflet JS einbinden -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <script>
+        // Karte initialisieren und zentrieren
+        var map = L.map('map').setView([53.5511, 9.9937], 12);
+
+        // OpenStreetMap Tile Layer hinzufügen
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+
+
+
+
+        // Marker 1 // Klaus Brodrecht Jg. 1923
+        var marker1 = createMarker([53.58146840145552, 9.992453553107266], 'Klaus Brodrecht Jg. 1923', 
+        'Hier wohnte Klaus Brodrecht Jg. 1923 eingewiesen 1930 Alsterdorfer Anstalten verlegt 7.8.1943 Heilanstalt Eichberg ermordet 26.8.1943.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Klaus+Brodrecht&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=5782');
+
+        // Marker 2 erstellen und Popup binden
+        var marker2 = createMarker([53.58166631902956, 9.992428614595706], 'Elisabeth Lazarus Jg. 1873',
+        'Hier wohnte Elisabeth Lazarus geb. May Jg. 1873 deportiert 1942 Theresienstadt ermordet 3.6.1943.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Ilse+Frensdorff&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=7071');
+
+        // Marker 3 // Markus Gottschalk Jg. 1909
+        var marker3 = createMarker([53.58118390116753, 9.991744147730305], 'Markus Gottschalk Jg. 1909', 
+        'Hier wohnte Gerhard Markus Gottschalk Jg. 1909 Flucht 1937 Holland interniert Westerbork deportiert 1944 Theresienstadt 1944 Auschwitz ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Markus+Gottschalk+Jg.+1909&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=2962');
+
+        // Marker 4 // Minna Aron geb. Levy Jg. 1879
+        var marker4 = createMarker([53.58020032141989, 9.990711570981812], 'Minna Aron geb. Levy Jg. 1879', 
+        'Hier wohnte Minna Aron geb. Levy Jg. 1879 deportiert 1941 Riga ermordet am 6.12.1941.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Minna+Aron&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=244');
+
+        // Marker 5 erstellen und Popup binden
+        var marker5 = createMarker([53.579548183170346, 9.989385502264192], 'Eva Gumpert geb. Liebermann Jg. 1878', 
+        'Hier wohnte Eva Gumpert geb. Liebermann Jg. 1878 deportiert 1941 Minsk ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Eva+Gumpert&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=2960');
+
+        // Marker 6 erstellen und Popup binden
+        var marker6 = createMarker([53.577707948312344, 9.99619301211106], 'Henry Seligmann Jg. 1873', 
+        'Hier wohnte Henry Seligmann Jg. 1873 gedemütigt/entrechtet Flucht in den Tod 30.6.1942.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Henry+Seligmann&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=6429');
+
+        // Marker 7 erstellen und Popup binden
+        var marker7 = createMarker([53.5778456537448, 9.996802299856249], 'Ivan Fontheim Jg. 1861', 
+        'Hier wohnte Ivan Fontheim Jg. 1861 entrechtet/gedemütigt Flucht in den Tod 16.7.1942.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Ivan+Fontheim&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=1632');
+
+        // Marker 8 erstellen und Popup binden
+        var marker8 = createMarker([53.57659781702738, 9.997187292442876], 'Nanny Behrend geb. Auerbach Jg. 1882', 
+        'Hier wohnte Nanny Behrend geb. Auerbach Jg. 1882 deportiert 1942 Theresienstadt tot 24.1.1943.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Nanny+Behrend&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=1631');
+
+        // Marker 9 erstellen und Popup binden
+        var marker9 = createMarker([53.572104425065305, 9.977980482056662], 'Curt Justus Neisel Jg. 1910', 
+        'Hier wohnte Curt Justus Neisel Jg. 1910 eingewiesen 1939 Alsterdorfer Anstalten verlegt 28.11.1941 Heilanstalt Tiegenhof ermordet 5.2.1942.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Curt+Justus+Neisel&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=5659');
+
+        // Marker 10 erstellen und Popup binden
+        var marker10 = createMarker([53.572720935153505, 9.975876269756801], 'Betty Bari geb. Heimann Jg.', 
+        'Hier wohnte Betty Bari geb. Heimann Jg. 1888 deportiert 1942 Theresienstadt befreit.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Betty+Bari&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=6108');
+
+        // Marker 11 erstellen und Popup binden
+        var marker11 = createMarker([53.57296628568562, 9.975570280802259], 'Eliesar Loebenstein Jg. 1883', 
+        'Hier wohnte Eliesar Loebenstein Jg. 1883 deportiert 1942 Theresienstadt 1944 Auschwitz ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Eliesar+Loebenstein&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=6546');
+
+        // Marker 12 erstellen und Popup binden
+        var marker12 = createMarker([53.57398303256392, 9.974923111456231], 'Marion Werner Jg. 1923', 
+        'Hier wohnte Marion Werner Jg. 1923 deportiert 1941 Łodz/Litzmannstadt 1942 Chelmno/Kulmhof ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Marion+Werner&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=4929');
+
+        // Marker 13 erstellen und Popup binden
+        var marker13 = createMarker([53.574221415116384, 9.97351939674153], 'Renate Eva Freimuth', 
+        'Hier wohnte Renate Eva Freimuth Jg. 1925 deportiert 1941 Łodz 1942 weiterdeportiert ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Renate+Eva+Freimuth&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=3412');
+
+        // Marker 14 erstellen und Popup binden
+        var marker14 = createMarker([53.5746654960118, 9.972779130782111], 'Julius Josias', 
+        'Hier wohnte Julius Josias Jg. 1938 deportiert 1942 Theresienstadt 1944 Auschwitz ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Julius+Josias&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=4023');
+
+        // Marker 15 erstellen und Popup binden
+        var marker15 = createMarker([53.573139625990606, 9.982006767277966], 'Bertha Gansel geb. Gabriel Jg. 1873', 
+        'Hier wohnte Bertha Gansel geb. Gabriel Jg. 1873 deportiert 1941 ermordet in Łodz/Litzmannstadt.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Bertha+Gansel&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=5141');
+
+        // Marker 16 erstellen und Popup binden
+        var marker16 = createMarker([53.57338885912684, 9.98204405383651], 'Johanna Bernstein geb. André Jg. 1867', 
+        'Hier wohnte Johanna Bernstein geb. André Jg. 1867 deportiert 1943 Theresienstadt ermordet 17.5.1943.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Johanna+Bernstein+geb.+Andr%E9&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=4690');
+
+        // Marker 17 erstellen und Popup binden
+        var marker17 = createMarker([53.57382189551361, 9.982014674652302], 'Daniel Isaak Jg. 1923', 
+        'Hier wohnte Daniel Isaak Jg. 1923 Flucht Holland deportiert 1943 Sobibor ermordet.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Daniel+Isaak&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=1851');
+
+        // Marker 18 erstellen und Popup binden
+        var marker18 = createMarker([53.575700993669805, 9.981631731441233], 'Ernst Alsberg Jg. 1879', 
+        'Hier wohnte Ernst Alsberg Jg. 1879 deportiert 1942 Theresienstadt ermordet 28.10.1944 Auschwitz.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Ernst+Alsberg&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=5237');
+
+        // Marker 19 erstellen und Popup binden
+        var marker19 = createMarker([53.5797821931629, 9.98195104765192], 'Jacob Gärtner Jg. 1879', 
+        'Hier wohnte Jacob Gärtner Jg. 1879 Polenaktion 1938 Zbaszyn Flucht Holland interniert Westerbork deportiert 1943 Sobibor ermordet 2.4.1943.',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&r_name=Jacob+G%E4rtner&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=4549');
+
+        // Marker 20 erstellen und Popup binden
+        var marker20 = createMarker([53.58071041795807, 9.981964692443134], 'William Stern Jg. 1871.', 
+        'Hier wohnte William Stern Jg. 1871 Flucht 1934 USA tot 27.3.1938 Durham',
+        'https://www.stolpersteine-hamburg.de/index.php?&MAIN_ID=7&p=1&r_name=William+Stern&r_strasse=&r_bezirk=&r_stteil=&r_sort=Nachname_AUF&recherche=recherche&submitter=suchen&BIO_ID=5944');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Funktion zur Marker-Erstellung und Popup-Bindung
+        function createMarker(latlng, title, content, link) {
+            var marker = L.marker(latlng).addTo(map);
+            var popupContent = '<div class="custom-popup"><h3>' + title + '</h3><p>' + content + '</p>';
+            if (link.includes('http')) {
+                popupContent += '<a href="' + link + '" target="_blank">Mehr erfahren</a>';
+            } else {
+                popupContent += '<img src="' + link + '" alt="Platzhalterbild" />';
+            }
+            popupContent += '</div>';
+            marker.bindPopup(popupContent);
+            return marker;
+        }
+
+    </script>
+</body>
+</html>
